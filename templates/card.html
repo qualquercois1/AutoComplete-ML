@@ -1,0 +1,21 @@
+<div style="
+    background-color: $cor_fundo; 
+    color: $cor_texto;
+    padding: 10px; 
+    border-radius: 8px; 
+    text-align: center; 
+    height: ${altura}px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    margin-top: ${margin_top}px;
+    box-shadow: 2px 4px 12px rgba(0,0,0,0.15);
+    opacity: 0;
+    animation: subirPodio 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${delay_card}s forwards;
+">
+    <div style="opacity: 0; animation: aparecerTexto 0.3s ease ${delay_texto}s forwards;">
+        <div style="font-size: 13px; opacity: 0.85;">$rankº Lugar</div>
+        <div style="font-size: ${tamanho_fonte}px; font-weight: bold; margin: 4px 0;">$palavra</div>
+        <div style="font-size: 12px;">Probabilidade: $prob</div>
+    </div>
+</div>

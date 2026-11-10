@@ -1,0 +1,28 @@
+@keyframes subirPodio {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scaleY(0.2);
+        transform-origin: bottom;
+    }
+    70% {
+        opacity: 1;
+        transform: translateY(-5px) scaleY(1.05);
+        transform-origin: bottom;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+        transform-origin: bottom;
+    }
+}
+
+@keyframes aparecerTexto {
+    0% {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

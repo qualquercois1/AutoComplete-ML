@@ -1,8 +1,34 @@
 import streamlit as st
+from string import Template
 from st_keyup import st_keyup
 from bayes import calcular_probabilidade
 
+def carregar_css(caminho):
+    with open(caminho, "r", encoding="utf-8") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+def desenhar_card(palavra, prob, rank, cor_fundo, cor_texto, altura, margin_top, tamanho_fonte, delay_card, delay_texto):
+    with open("templates/card.html", "r", encoding="utf-8") as f:
+        template = Template(f.read())
+        
+    html_preenchido = template.substitute(
+        cor_fundo=cor_fundo,
+        cor_texto=cor_texto,
+        altura=altura,
+        margin_top=margin_top,
+        delay_card=delay_card,
+        delay_texto=delay_texto,
+        rank=rank,
+        tamanho_fonte=tamanho_fonte,
+        palavra=palavra,
+        prob=f"{prob*100:.4f}%"
+    )
+    
+    st.markdown(html_preenchido, unsafe_allow_html=True)
+
 st.title("Teste de Autocomplete Bayesiano")
+
+carregar_css("style.css")
 
 user_input = st_keyup(
     label="Comece a digitar uma palavra:",
@@ -10,28 +36,6 @@ user_input = st_keyup(
     key="meu_texto",
     debounce=300
 )
-
-def desenhar_card(palavra, prob, rank, cor_fundo, cor_texto, altura, margin_top, tamanho_fonte):
-    html = f"""
-    <div style="
-        background-color: {cor_fundo}; 
-        color: {cor_texto};
-        padding: 10px; 
-        border-radius: 8px; 
-        text-align: center; 
-        height: {altura}px; 
-        display: flex; 
-        flex-direction: column; 
-        justify-content: center;
-        margin-top: {margin_top}px; /* Isso cria o efeito de 'degrau' do pódio */
-        box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-    ">
-        <div style="font-size: 14px; opacity: 0.8;">{rank}º Lugar</div>
-        <div style="font-size: {tamanho_fonte}px; font-weight: bold; margin: 5px 0;">{palavra}</div>
-        <div style="font-size: 12px;">Probabilidade: {prob*100:.4f}%</div>
-    </div>
-    """
-    st.markdown(html, unsafe_allow_html=True)
 
 if user_input and user_input.strip():
     prefixo = user_input.strip().lower() 
@@ -49,20 +53,19 @@ if user_input and user_input.strip():
         with col1:
             if len(palavras_validas) >= 2:
                 p, info = palavras_validas[1]
-                desenhar_card(p, info['p_palavra'], 2, "#E0E0E0", "#000000", 100, 30, 20)
+                desenhar_card(p, info['p_palavra'], 2, "#E0E0E0", "#000000", 100, 30, 20, 0.2, 0.50)
         
         with col2:
             if len(palavras_validas) >= 1:
                 p, info = palavras_validas[0]
-                desenhar_card(p, info['p_palavra'], 1, "#FFD700", "#000000", 130, 0, 24)
+                desenhar_card(p, info['p_palavra'], 1, "#FFD700", "#000000", 130, 0, 24, 0.4, 0.70)
 
         with col3:
             if len(palavras_validas) >= 3:
                 p, info = palavras_validas[2]
-                desenhar_card(p, info['p_palavra'], 3, "#CD7F32", "#000000", 80, 50, 16)
+                desenhar_card(p, info['p_palavra'], 3, "#CD7F32", "#000000", 80, 50, 16, 0.0, 0.30)
                 
         restante = palavras_validas[3:]
-        
         if restante:
             st.markdown("---")
             st.subheader("Outras Sugestões")
