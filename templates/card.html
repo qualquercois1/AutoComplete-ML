@@ -1,42 +1,16 @@
-<style>
-@keyframes animCardEntrar_$key_id {
-    0% { opacity: 0; transform: translateY(35px) scale(0.4); transform-origin: bottom; }
-    75% { opacity: 1; transform: translateY(-6px) scale(1.04); transform-origin: bottom; }
-    100% { opacity: 1; transform: translateY(0) scale(1); transform-origin: bottom; }
-}
-@keyframes animTextoEntrar_$key_id {
-    0% { opacity: 0; transform: translateY(6px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes animCardSair_$key_id {
-    0% { opacity: 1; transform: translateY(0) scale(1); transform-origin: bottom; }
-    100% { opacity: 0; transform: translateY(40px) scale(0.4); transform-origin: bottom; }
-}
-@keyframes animTextoSair_$key_id {
-    0% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(6px); }
-}
-</style>
-
-<div class="card-podio" style="
-    background-color: $cor_fundo; 
-    color: $cor_texto;
-    padding: 10px; 
-    border-radius: 8px; 
-    text-align: center; 
-    height: ${altura}px; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center;
-    margin-top: ${margin_top}px;
-    box-shadow: 2px 4px 12px rgba(0,0,0,0.15);
-    opacity: $opacidade_inicial;
-    animation: $animacao_card;
-">
-    <div style="opacity: $opacidade_inicial; animation: $animacao_texto;">
-        <div style="font-size: 13px; opacity: 0.85;">$rankº Lugar</div>
-        <div style="font-size: ${tamanho_fonte}px; font-weight: bold; margin: 4px 0;">$palavra</div>
-        <div style="font-size: 12px;">Probabilidade: $prob</div>
+<a href="?selecionado=$palavra" target="_self" class="card-link">
+    <div class="card-podio" style="
+        background: $cor_fundo; 
+        color: $cor_texto;
+        height: ${altura}px; 
+        margin-top: ${margin_top}px;
+        opacity: $opacidade_inicial;
+        animation: $animacao_card;
+    ">
+        <div style="opacity: $opacidade_inicial; animation: $animacao_texto;">
+            <div class="card-rank">$rankº Lugar</div>
+            <div class="card-palavra" style="font-size: ${tamanho_fonte}px;">$palavra</div>
+            <div class="card-prob">Probabilidade: $prob</div>
+        </div>
     </div>
-</div>
+</a>

@@ -1,5 +1,5 @@
 streamlit
-streamlit-stkeyup
+streamlit-keyup
 datasets
 ipykernel
 pandas
