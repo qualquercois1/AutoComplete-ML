@@ -1,36 +1,21 @@
 <style>
-@keyframes animCard_$key_id {
-    0% {
-        opacity: 0;
-        transform: translateY(50px) scale(0.2);
-        transform-origin: bottom;
-    }
-    20% {
-        opacity: 0.1;
-        transform: translateY(40px) scale(0.3);
-        transform-origin: bottom;
-    }
-    75% {
-        opacity: 1;
-        transform: translateY(-8px) scale(1.05);
-        transform-origin: bottom;
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        transform-origin: bottom;
-    }
+@keyframes animCardEntrar_$key_id {
+    0% { opacity: 0; transform: translateY(35px) scale(0.4); transform-origin: bottom; }
+    75% { opacity: 1; transform: translateY(-6px) scale(1.04); transform-origin: bottom; }
+    100% { opacity: 1; transform: translateY(0) scale(1); transform-origin: bottom; }
+}
+@keyframes animTextoEntrar_$key_id {
+    0% { opacity: 0; transform: translateY(6px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes animTexto_$key_id {
-    0% {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+@keyframes animCardSair_$key_id {
+    0% { opacity: 1; transform: translateY(0) scale(1); transform-origin: bottom; }
+    100% { opacity: 0; transform: translateY(40px) scale(0.4); transform-origin: bottom; }
+}
+@keyframes animTextoSair_$key_id {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(6px); }
 }
 </style>
 
@@ -46,10 +31,10 @@
     justify-content: center;
     margin-top: ${margin_top}px;
     box-shadow: 2px 4px 12px rgba(0,0,0,0.15);
-    opacity: 0;
-    animation: animCard_$key_id 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.2) ${delay_card}s forwards;
+    opacity: $opacidade_inicial;
+    animation: $animacao_card;
 ">
-    <div style="opacity: 0; animation: animTexto_$key_id 0.3s ease ${delay_texto}s forwards;">
+    <div style="opacity: $opacidade_inicial; animation: $animacao_texto;">
         <div style="font-size: 13px; opacity: 0.85;">$rankº Lugar</div>
         <div style="font-size: ${tamanho_fonte}px; font-weight: bold; margin: 4px 0;">$palavra</div>
         <div style="font-size: 12px;">Probabilidade: $prob</div>
