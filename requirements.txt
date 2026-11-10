@@ -1,0 +1,5 @@
+streamlit
+streamlit-stkeyup
+datasets
+ipykernel
+pandas
