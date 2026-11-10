@@ -7,10 +7,12 @@ def carregar_css(caminho):
     with open(caminho, "r", encoding="utf-8") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-def desenhar_card(palavra, prob, rank, cor_fundo, cor_texto, altura, margin_top, tamanho_fonte, delay_card, delay_texto):
+def desenhar_card(palavra, prob, rank, cor_fundo, cor_texto, altura, margin_top, tamanho_fonte, delay_card, delay_texto, prefixo):
     with open("templates/card.html", "r", encoding="utf-8") as f:
         template = Template(f.read())
         
+    key_id = f"{prefixo}_{rank}_{palavra}".replace("+", "plus").replace(" ", "_")
+
     html_preenchido = template.substitute(
         cor_fundo=cor_fundo,
         cor_texto=cor_texto,
@@ -21,7 +23,8 @@ def desenhar_card(palavra, prob, rank, cor_fundo, cor_texto, altura, margin_top,
         rank=rank,
         tamanho_fonte=tamanho_fonte,
         palavra=palavra,
-        prob=f"{prob*100:.4f}%"
+        prob=f"{prob*100:.4f}%",
+        key_id=key_id
     )
     
     st.markdown(html_preenchido, unsafe_allow_html=True)
@@ -53,17 +56,17 @@ if user_input and user_input.strip():
         with col1:
             if len(palavras_validas) >= 2:
                 p, info = palavras_validas[1]
-                desenhar_card(p, info['p_palavra'], 2, "#E0E0E0", "#000000", 100, 30, 20, 0.2, 0.50)
+                desenhar_card(p, info['p_palavra'], 2, "#E0E0E0", "#000000", 100, 30, 20, 0.10, 0.40, prefixo)
         
         with col2:
             if len(palavras_validas) >= 1:
                 p, info = palavras_validas[0]
-                desenhar_card(p, info['p_palavra'], 1, "#FFD700", "#000000", 130, 0, 24, 0.4, 0.70)
+                desenhar_card(p, info['p_palavra'], 1, "#FFD700", "#000000", 130, 0, 24, 0.25, 0.55, prefixo)
 
         with col3:
             if len(palavras_validas) >= 3:
                 p, info = palavras_validas[2]
-                desenhar_card(p, info['p_palavra'], 3, "#CD7F32", "#000000", 80, 50, 16, 0.0, 0.30)
+                desenhar_card(p, info['p_palavra'], 3, "#CD7F32", "#000000", 80, 50, 16, 0.00, 0.30, prefixo)
                 
         restante = palavras_validas[3:]
         if restante:

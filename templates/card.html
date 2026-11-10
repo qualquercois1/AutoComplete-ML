@@ -1,4 +1,40 @@
-<div style="
+<style>
+@keyframes animCard_$key_id {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.2);
+        transform-origin: bottom;
+    }
+    20% {
+        opacity: 0.1;
+        transform: translateY(40px) scale(0.3);
+        transform-origin: bottom;
+    }
+    75% {
+        opacity: 1;
+        transform: translateY(-8px) scale(1.05);
+        transform-origin: bottom;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        transform-origin: bottom;
+    }
+}
+
+@keyframes animTexto_$key_id {
+    0% {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+
+<div class="card-podio" style="
     background-color: $cor_fundo; 
     color: $cor_texto;
     padding: 10px; 
@@ -11,9 +47,9 @@
     margin-top: ${margin_top}px;
     box-shadow: 2px 4px 12px rgba(0,0,0,0.15);
     opacity: 0;
-    animation: subirPodio 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${delay_card}s forwards;
+    animation: animCard_$key_id 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.2) ${delay_card}s forwards;
 ">
-    <div style="opacity: 0; animation: aparecerTexto 0.3s ease ${delay_texto}s forwards;">
+    <div style="opacity: 0; animation: animTexto_$key_id 0.3s ease ${delay_texto}s forwards;">
         <div style="font-size: 13px; opacity: 0.85;">$rankº Lugar</div>
         <div style="font-size: ${tamanho_fonte}px; font-weight: bold; margin: 4px 0;">$palavra</div>
         <div style="font-size: 12px;">Probabilidade: $prob</div>
