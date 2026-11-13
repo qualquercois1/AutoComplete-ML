@@ -50,7 +50,6 @@ def calcular_probabilidade(prefixo):
         probabilidades[palavra] = {
             "p_palavra": p_palavra,
             "verossimilhanca": verossimilhanca,
-            "p_prefixo": p_prefixo,
             "probabilidade_final": probabilidade_final
         }
 
