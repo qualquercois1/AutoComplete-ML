@@ -25,7 +25,7 @@ def calcular_probabilidade(prefixo):
     palavras = dict(Counter(palavras))
 
     #calculo de B
-    B = [b for b in palavras if b.startswith(palavra_teste)]
+    B = [b for b in palavras if b.startswith(prefixo)]
     B_tam = len(B)
 
     probabilidades = {}
@@ -39,7 +39,7 @@ def calcular_probabilidade(prefixo):
         #calculo de P(A)
         p_palavra = frequencia / total_palavras
         #calculo de P(B|A)
-        verossimilhanca = 1.0 if palavra.startswith(palavra_teste) else 0.0
+        verossimilhanca = 1.0 if palavra.startswith(prefixo) else 0.0
         
         if p_prefixo > 0 and verossimilhanca > 0:
             #calculo de P(A|B)
